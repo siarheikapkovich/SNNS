@@ -1,4 +1,4 @@
-#include "global.h"
+п»ї#include "global.h"
 
 LRESULT CALLBACK WndFunction(HWND hwnd, UINT message, WPARAM wParam, LPARAM lParam)
 {
@@ -95,7 +95,7 @@ LRESULT CALLBACK WndFunction(HWND hwnd, UINT message, WPARAM wParam, LPARAM lPar
 			RetVal = (INT)DialogBox(g_hInst, MAKEINTRESOURCE(IDD_ADD_SYNAPSE), g_hWnd, DlgAddSynapse);
 			if(RetVal == 1)
 			{
-				MessageBox(g_hWnd, "Ура!!!", "Дебил", MB_OK);
+				MessageBox(g_hWnd, "РЈСЂР°!!!", "Р”РµР±РёР»", MB_OK);
 			}
 			break;
 		case IDM_ADD_COLS:
@@ -185,7 +185,7 @@ LRESULT CALLBACK WndFunction(HWND hwnd, UINT message, WPARAM wParam, LPARAM lPar
 		pt.x = GET_X_LPARAM(lParam); 
         pt.y = GET_Y_LPARAM(lParam);
 		DesObj = -1;
-		// Загрузка меню
+		// Р—Р°РіСЂСѓР·РєР° РјРµРЅСЋ
  		hmenu = LoadMenu(g_hInst, MAKEINTRESOURCE(IDR_MENU1)); 
 		hmenuTrackPopup = GetSubMenu(hmenu, 0);
 
@@ -214,12 +214,12 @@ LRESULT CALLBACK WndFunction(HWND hwnd, UINT message, WPARAM wParam, LPARAM lPar
 		
 		if(DesObj != -1)
 		{
-			// Запрещаем операции не выполняемые над объектами
+			// Р—Р°РїСЂРµС‰Р°РµРј РѕРїРµСЂР°С†РёРё РЅРµ РІС‹РїРѕР»РЅСЏРµРјС‹Рµ РЅР°Рґ РѕР±СЉРµРєС‚Р°РјРё
 			EnableMenuItem(hmenuTrackPopup, P_ADD_NEURON, MF_GRAYED);
 			EnableMenuItem(hmenuTrackPopup, P_ADD_IN, MF_GRAYED);
 			EnableMenuItem(hmenuTrackPopup, P_ADD_OUT, MF_GRAYED);
 		}
-		// Отображаем меню
+		// РћС‚РѕР±СЂР°Р¶Р°РµРј РјРµРЅСЋ
         ClientToScreen(hwnd, (LPPOINT) &pt); 
 	    TrackPopupMenu(hmenuTrackPopup, TPM_LEFTALIGN | TPM_LEFTBUTTON, pt.x, pt.y, 0, g_hWnd, NULL); 
  	    DestroyMenu(hmenu); 
@@ -227,7 +227,7 @@ LRESULT CALLBACK WndFunction(HWND hwnd, UINT message, WPARAM wParam, LPARAM lPar
 	case WM_LBUTTONDOWN:
 		pt.x = GET_X_LPARAM(lParam);
 		pt.y = GET_Y_LPARAM(lParam);
-		// Проверяем попадание в обьект
+		// РџСЂРѕРІРµСЂСЏРµРј РїРѕРїР°РґР°РЅРёРµ РІ РѕР±СЊРµРєС‚
 		if(NeuView.size() != 0)
 		{
 			UINT d2;
@@ -236,9 +236,9 @@ LRESULT CALLBACK WndFunction(HWND hwnd, UINT message, WPARAM wParam, LPARAM lPar
 				d2 = (pt.x - NeuView[i].m_Pos.x)*(pt.x - NeuView[i].m_Pos.x) + (pt.y - NeuView[i].m_Pos.y)*(pt.y - NeuView[i].m_Pos.y);
 				if(d2 < 100)
 				{
-					// Захват объекта для перетаскивания
+					// Р—Р°С…РІР°С‚ РѕР±СЉРµРєС‚Р° РґР»СЏ РїРµСЂРµС‚Р°СЃРєРёРІР°РЅРёСЏ
 					DragNum = i;
-					// Выделение объекта как текущего
+					// Р’С‹РґРµР»РµРЅРёРµ РѕР±СЉРµРєС‚Р° РєР°Рє С‚РµРєСѓС‰РµРіРѕ
 					CyrObj = i;
 				}
 			}
@@ -250,7 +250,7 @@ LRESULT CALLBACK WndFunction(HWND hwnd, UINT message, WPARAM wParam, LPARAM lPar
 		SendMessage(g_hWnd, WM_PAINT, 0, 0);
 		break;
 	case WM_MOUSEMOVE:
-		// Перетаскивание
+		// РџРµСЂРµС‚Р°СЃРєРёРІР°РЅРёРµ
 		if(DragNum != -1)
 		{
 			UINT sx, sy;
@@ -267,7 +267,7 @@ LRESULT CALLBACK WndFunction(HWND hwnd, UINT message, WPARAM wParam, LPARAM lPar
 				pt.y += MAP_STEP - sy;
 			else
                 pt.y -= sy;
-			// Контроль выхода за границы карты
+			// РљРѕРЅС‚СЂРѕР»СЊ РІС‹С…РѕРґР° Р·Р° РіСЂР°РЅРёС†С‹ РєР°СЂС‚С‹
 			if((UINT)pt.x > g_MapWidtch - 30)
 				pt.x = g_MapWidtch - 30;
 			if(pt.x < 30)
@@ -316,7 +316,7 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 	wClass.lpfnWndProc = WndFunction;
 
 	RegisterClass(&wClass);
-	g_hWnd = CreateWindow("WindowClass", "Нейросимулятор", WS_OVERLAPPEDWINDOW, 0, 0, 200, 200, NULL, LoadMenu(hInstance,MAKEINTRESOURCE(IDR_MAIN_MENU)), hInstance, NULL);
+	g_hWnd = CreateWindow("WindowClass", "РќРµР№СЂРѕСЃРёРјСѓР»СЏС‚РѕСЂ", WS_OVERLAPPEDWINDOW, 0, 0, 200, 200, NULL, LoadMenu(hInstance,MAKEINTRESOURCE(IDR_MAIN_MENU)), hInstance, NULL);
 	if(!g_hWnd) return 0;
 
 		
